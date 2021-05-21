@@ -383,6 +383,121 @@ More..[^ GitHub 远程分支理解和使用][^冲突]
 
 
 
+
+
+
+
+
+
+```shell
+KrednE@DESKTOP-PP2N26L MINGW64 ~/Desktop/LearnDocs (master)
+$ git commit -m "first commit"
+[master (root-commit) 0fcd3d0] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+
+KrednE@DESKTOP-PP2N26L MINGW64 ~/Desktop/LearnDocs (master)
+$ git branch -M main
+
+KrednE@DESKTOP-PP2N26L MINGW64 ~/Desktop/LearnDocs (main)
+$ git remote add origin git@github.com:Jeiplos/LearningDocs.git
+
+KrednE@DESKTOP-PP2N26L MINGW64 ~/Desktop/LearnDocs (main)
+$ git push -u origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 226 bytes | 226.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:Jeiplos/LearningDocs.git
+ * [new branch]      main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+
+```
+
+
+
+## 操作流程
+
+*我真想摸了今天。。。只记录下流程吧。。*
+
+
+
+1. 创建 GitHub 账号
+
+2. 本地安装 Git ，设置 SSH，GitHub 中填写公钥
+
+3. 在 GitHub 中创建 Repository，示例命名`learn`，创建分支 dev
+
+4. 在本地文件夹中创建 Repository：在文件夹中运行 Git bash，`git init`会在**当前**文件夹中生成 .git 文件夹
+
+5. 连接到远程仓库：这是 GitHub 提供的一套流程，要注意的一点是在第一次 commit 之后 `git branch`才能正常显示 branch 列表
+
+   ```shell
+   $ touch README.md	//新建README.md
+   $ git add README.md	
+   $ git commit -m "first commit"
+   $ git branch -M main
+   $ git remote add origin git@github.com:Jeiplos/LearningDocs.git	//两个关键字两个参数，在这里设置了远程仓库的名字
+   $ git push -u origin main	//-u 参数将本地该分支与远程的 main 分支关联了，
+   ```
+
+   > 再来说说git push -u和git branch --set-upstream-to指令之间的区别。
+   >
+   > 举个例子：我要把本地分支mybranch1与远程仓库origin里的分支mybranch1建立关联。
+   >
+   > （如果使用下列途径1的话，首先，你要切换到mybranch1分支上（git checkout mybranch1））
+   >
+   > 两个途径：1. git push -u origin mybranch1  2. git branch --set-upstream-to=origin/mybranch1 mybranch1
+   >
+   > 这两种方式都可以达到目的。但是1方法更通用，因为你的远程库有可能并没有mybranch1分支，这种情况下你用2方法就不可行，连目标分支都不存在，怎么进行关联呢？所以可以总结一下：git push -u origin mybranch1 相当于 git push origin mybranch1 + git branch --set-upstream-to=origin/mybranch1 mybranch1
+   >
+   > 
+   >
+   > 作者：老P孩儿
+   > 链接：https://www.zhihu.com/question/20019419/answer/48434769
+   > 来源：知乎
+   > 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+6. 本地新建 dev branch 并与 远程仓库 dev 连接：
+
+   ```shell
+   $ git switch -c dev		//新建并切换到 dev
+   $ git branch
+   $ git branch --set-upstream-to=origin/dev //连接，参考上方文章
+   ```
+
+   * 前面是手动创建了远程 dev 和本地 dev 分支后的连接方法。当从远程库 clone 时，默认情况下只能看到本地的 main 分支。这时就有`$ git checkout -b dev origin/dev`创建本地 dev 分支。
+
+7. 假设远程仓库有 README.md 或者怎样，总之要拉取远程分支到本地分支：
+
+   ```shell
+   $ git switch dev
+   //git pull <远程主机名> <远程分支名>:<本地分支名>
+   $ git pull origin dev//远程分支名
+   $ git add .
+   $ git commit -m "message"
+   ```
+
+8. 把本地 dev 合并到 本地 main：
+
+   ```shell
+   $ git switch main
+   $ git merge dev
+   ```
+
+9. 本地 main 推送：
+
+   ```shell
+   $ git push origin main
+   //git push <远程主机名> <本地分支名>:<远程分支名>
+   //如果本地分支名与远程分支名相同，则可以省略冒号：
+   //git push <远程主机名> <本地分支名>
+   ```
+
+   
+
+
+
 [^SSH]: 加密和解密是采用不同的密钥（公开密钥），也就是非对称密钥密码系统，每个通信方均需要两个密钥，即公钥和私钥，这两把密钥可以互为加解密。身份认证的过程如下：1. Alice用她的私人密钥对文件加密，从而对文件签名。2. Alice将签名的文件传送给Bob。3. Bob用Alice的公钥解密文件，从而验证签名。
 [^ GitHub 远程分支理解和使用]: 
 [^冲突]: 
