@@ -37,7 +37,7 @@
 
 
 
-![img](http://rogerdudler.github.io/git-guide/img/trees.png)
+![img](\LearnDocs\LearnGit\resource\trees.png)
 
 
 
@@ -303,7 +303,9 @@ $ git remote rm origin
 
 图中展示了工作区、版本库**中的**暂存区和版本库之间的关系：
 
-![img](https://www.runoob.com/wp-content/uploads/2015/02/1352126739_7909.jpg)
+![img](\LearnDocs\LearnGit\resource\1352126739_7909.jpg)
+
+![](\LearnDocs\LearnGit\resource\git 操作关系图.jpg)
 
 
 
@@ -494,7 +496,22 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
    //git push <远程主机名> <本地分支名>
    ```
 
-   
+
+
+
+## 发现问题
+
+
+
+> Q：远程库已更新（在 GitHub 上 merge 等），但是在本地 main 分支`git status`得到的结果是 "Your branch is up to date"，什么情况？
+>
+> A：![git 操作关系图](\LearnDocs\LearnGit\resource\git 操作关系图.jpg)
+>
+> 可以简单的概括为：
+>
+> `git fetch`是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。
+>
+> 而`git pull` 则是将远程主机的最新内容拉下来后直接合并，即：`git pull = git fetch + git merge`，这样可能会产生冲突，需要手动解决。
 
 
 
