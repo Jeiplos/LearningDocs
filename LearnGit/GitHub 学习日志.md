@@ -515,6 +515,20 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 
 
 
+> Q：git pull 时提示 Please enter a commit message to explain why this merge is necessary.
+>
+> A：Please enter a commit message to explain why this merge is necessary.
+> 提示输入为何需要merge操作
+> 如下
+>
+> 需要输入或者跳过这一步
+>
+> 1. 按`i`，进入插入（insert）描述操作，可以选择不输入
+> 2. 按`Esc`，结束插入描述操作
+> 3. 输入`:wq`按`Enter`，表示保存并结束本次操作
+> 4. enter键即可结束本次错误信息
+>    
+
 [^SSH]: 加密和解密是采用不同的密钥（公开密钥），也就是非对称密钥密码系统，每个通信方均需要两个密钥，即公钥和私钥，这两把密钥可以互为加解密。身份认证的过程如下：1. Alice用她的私人密钥对文件加密，从而对文件签名。2. Alice将签名的文件传送给Bob。3. Bob用Alice的公钥解密文件，从而验证签名。
 [^ GitHub 远程分支理解和使用]: 
 [^冲突]: 
